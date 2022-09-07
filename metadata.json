@@ -1,7 +1,7 @@
 {
     "display_name": "Regression using Sklearn",
     "command": "generate",
-    "dependencies": ["numpy","scikit-learn", "matplotlib", "seaborn", "mlextend", "jupyter"],
+    "dependencies": ["numpy", "scikit-learn", "matplotlib", "seaborn", "mlextend", "jupyter"],
 
     "keywords": ["Regression", "Sklearn", "Scikit-Learn"],
     "methodology": ["Regression"],
