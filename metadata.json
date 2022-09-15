@@ -1,5 +1,5 @@
 {
-    "display_name": "Regression using Sklearn",
+    "display_name": "ML Regression using Sklearn",
     "command": "generate",
     "dependencies": ["numpy", "scikit-learn", "matplotlib", "seaborn", "mlxtend", "jupyter"],
 
