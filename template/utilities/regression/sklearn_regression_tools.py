@@ -517,8 +517,9 @@ def plot_LassoCV_path(lasso_model, figsize=(10,6)):
     table = pd.DataFrame({"Alpha": lasso_model.alphas_, "Mean RMSE": np.sqrt(lasso_model.mse_path_.mean(axis=-1))})
     
     return ax, table
-    
-    
+
+
+# TODO: Add indicator for whether within X standard deviation from best result    
 def plot_ElasticNetCV_path(ENet_model, figsize=(10,6), cmap=None):
 
     if ENet_model.alphas is None:
@@ -537,8 +538,9 @@ def plot_ElasticNetCV_path(ENet_model, figsize=(10,6), cmap=None):
     else:
         # Alphas were set manually
         x_values = ENet_model.alphas
+        x_values.reverse()
         x_label = "Alpha values"
-        
+    
     frame = pd.DataFrame(np.sqrt(ENet_model.mse_path_.mean(axis=-1)), columns=x_values, index= ENet_model.l1_ratio)
     fig, ax = plt.subplots(1,1,figsize=figsize)
     ax = sns.heatmap(frame, linewidth=0.5, ax=ax, cmap = cmap)
