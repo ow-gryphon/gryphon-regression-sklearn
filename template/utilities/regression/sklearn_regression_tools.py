@@ -6,7 +6,7 @@ import traceback
 from collections import OrderedDict
 from itertools import compress
 
-from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error, explained_variance_score
+from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error, explained_variance_score, root_mean_squared_error
 from sklearn import linear_model
 from sklearn.preprocessing import StandardScaler
 
@@ -102,7 +102,7 @@ def sfa_linear_model(model, dataset, DV, IVs, forced_in=None, get_fitted=True):
         results_dict["Variance Explained"] = explained_variance_score(Y, predicted)
         if forced_in is not None:
             results_dict["Variance Explained Beyond Forced In"] = np.nan
-        results_dict["RMSE"] = mean_squared_error(Y, predicted, squared=False)
+        results_dict["RMSE"] = root_mean_squared_error(Y, predicted)
         results_dict["MAE"] = mean_absolute_error(Y, predicted)
 
         output = pd.concat([output, pd.DataFrame(results_dict, index=[0])]).reset_index(drop=True)
@@ -162,7 +162,7 @@ def sfa_linear_model(model, dataset, DV, IVs, forced_in=None, get_fitted=True):
             results_dict["Variance Explained Beyond Forced In"] = 1 - np.nansum((Y - predicted) ** 2) / np.nansum(
                 (Y - forced_in_fitted) ** 2)
 
-        results_dict["RMSE"] = mean_squared_error(Y, predicted, squared=False)
+        results_dict["RMSE"] = root_mean_squared_error(Y, predicted)
         results_dict["MAE"] = mean_absolute_error(Y, predicted)
 
         output = pd.concat([output, pd.DataFrame(results_dict, index=[0])]).reset_index(drop=True)
@@ -336,7 +336,7 @@ def mfa_linear_model(model, dataset, DV, IVs, get_fitted=True, detailed=False, m
 
     results_dict["Rsq"] = r2_score(Y, predicted)
     results_dict["Variance Explained"] = explained_variance_score(Y, predicted)
-    results_dict["RMSE"] = mean_squared_error(Y, predicted, squared=False)
+    results_dict["RMSE"] = root_mean_squared_error(Y, predicted)
     results_dict["MAE"] = mean_absolute_error(Y, predicted)
 
     # Statistical tests
